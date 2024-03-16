@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = Constants.NAMESPACE
-    compileSdk = Constants.TARGET_SDK
+    namespace = "xyz.teamgravity.pinlockcomposedemo"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = Constants.NAMESPACE
-        minSdk = Constants.MIN_SDK
-        targetSdk = Constants.TARGET_SDK
-        versionCode = 10200
-        versionName = "1.0.2"
+        applicationId = "xyz.teamgravity.pinlockcomposedemo"
+        minSdk = 21
+        targetSdk = 34
+        versionCode = 10300
+        versionName = "1.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -33,7 +33,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = Constants.JVM_TARGET
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -41,7 +41,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Constants.KOTLIN_COMPILER
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
 
     packaging {

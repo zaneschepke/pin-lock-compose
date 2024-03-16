@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -6,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "${Constants.PACKAGE}.pin_lock_compose"
-    compileSdk = Constants.TARGET_SDK
+    namespace = "xyz.teamgravity..pin_lock_compose"
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = Constants.MIN_SDK
+        minSdk = 21
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -27,7 +29,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Constants.KOTLIN_COMPILER
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
 
     packaging {
@@ -82,7 +84,7 @@ publishing {
             pom {
                 name.set("Pin Lock Compose")
                 description.set("Light library that is beautiful Pin Lock screen for Jetpack Compose. The library handles saving pin in Encrypted file. Integration is very easy and fast.")
-                url.set("https://github.com/zaneschepke/pin_lock_compose")
+                url.set("https://github.com/zaneschepke/pin-lock-compose")
 
                 licenses {
                     license {
@@ -92,9 +94,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection.set("scm:git:https://github.com/zaneschepke/pin_lock_compose")
-                    developerConnection.set("scm:git:https://github.com/zaneschepke/pin_lock_compose")
-                    url.set("https://github.com/zaneschepke/pin_lock_compose")
+                    connection.set("scm:git:https://github.com/zaneschepke/pin-lock-compose")
+                    developerConnection.set("scm:git:https://github.com/zaneschepke/pin-lock-compose")
+                    url.set("https://github.com/zaneschepke/pin-lock-compose")
                 }
                 developers {
                     organization {
@@ -109,23 +111,27 @@ publishing {
             }
         }
     }
+    val properties = Properties().apply {
+        load(rootProject.file("local.properties").reader())
+    }
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/zaneschepke/wireguard-android")
+            url = uri("https://maven.pkg.github.com/zaneschepke/pin-lock-compose")
             credentials {
-                username = System.getenv("GITHUB_USER") ?: getLocalProperty("GITHUB_USER")
-                password = System.getenv("GITHUB_TOKEN") ?: getLocalProperty("GITHUB_TOKEN")
+                username = properties.getProperty("GITHUB_USER")
+                password = properties.getProperty("GITHUB_TOKEN")
             }
         }
-        maven {
-            name = "sonatype"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = System.getenv("MAVEN_CENTRAL_USER") ?: getLocalProperty("MAVEN_CENTRAL_USER")
-                password = System.getenv("MAVEN_CENTRAL_PASS") ?: getLocalProperty("MAVEN_CENTRAL_PASS")
-            }
-        }
+        //disable maven central for now
+//        maven {
+//            name = "sonatype"
+//            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+//            credentials {
+//                username = System.getenv("MAVEN_CENTRAL_USER") ?: getLocalProperty("MAVEN_CENTRAL_USER")
+//                password = System.getenv("MAVEN_CENTRAL_PASS") ?: getLocalProperty("MAVEN_CENTRAL_PASS")
+//            }
+//        }
     }
 }
 
