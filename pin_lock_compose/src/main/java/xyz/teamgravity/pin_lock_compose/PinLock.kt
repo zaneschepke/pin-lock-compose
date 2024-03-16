@@ -1,25 +1,46 @@
 package xyz.teamgravity.pin_lock_compose
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.*
+import androidx.constraintlayout.compose.ChainStyle
+import androidx.constraintlayout.compose.ConstrainScope
+import androidx.constraintlayout.compose.ConstrainedLayoutReference
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintLayoutScope
+import androidx.constraintlayout.compose.Dimension
 
 /**
  * Covers the whole screen and displays the PinLock. This composable makes the user enter pin if it already exists. If there is
@@ -161,6 +182,7 @@ fun ChangePinLock(
  * @param onBackspace
  * Get called whenever backspace button is clicked.
  */
+@SuppressLint("UnusedContentLambdaTargetStateParameter")
 @Composable
 private fun BasePinLock(
     title: @Composable () -> Unit,
@@ -200,7 +222,7 @@ private fun BasePinLock(
                         dampingRatio = Spring.DampingRatioHighBouncy,
                         stiffness = Spring.StiffnessHigh
                     )
-                ) { 50 }.with(
+                ) { 50 }.togetherWith(
                     slideOutHorizontally(
                         animationSpec = spring(
                             dampingRatio = Spring.DampingRatioHighBouncy,
@@ -211,14 +233,14 @@ private fun BasePinLock(
             },
             modifier = Modifier.constrainAs(numberC) {
                 width = Dimension.matchParent
-            }
+            }, label = "Pin"
         ) {
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                PinIndicator(filled = numbers.size > 0)
+                PinIndicator(filled = numbers.isNotEmpty())
                 PinIndicator(filled = numbers.size > 1)
                 PinIndicator(filled = numbers.size > 2)
                 PinIndicator(filled = numbers.size > 3)

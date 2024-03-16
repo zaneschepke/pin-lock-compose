@@ -10,9 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven("https://jitpack.io")
     }
 }
 rootProject.name = "PinLockComposeDemo"
-include ':app'
-include ':pin_lock_compose'
+include(":app")
+include(":pin_lock_compose")

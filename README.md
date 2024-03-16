@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="http://developer.android.com/index.html"><img alt="Android" src="https://img.shields.io/badge/platform-android-green.svg"/></a>
-  <a href="https://jitpack.io/#raheemadamboev/pin-lock-compose"><img alt="Version" src="https://jitpack.io/v/raheemadamboev/pin-lock-compose.svg"/></a>
+  <a href="https://jitpack.io/#raheemadamboev/pin_lock_compose"><img alt="Version" src="https://jitpack.io/v/raheemadamboev/pin_lock_compose.svg"/></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
 </p>
@@ -24,7 +24,7 @@ allprojects {
 
 Include below dependency in build.gradle of application and sync it:
 ```groovy
-implementation 'com.github.raheemadamboev:pin-lock-compose:1.0.1'
+implementation 'com.github.raheemadamboev:pin_lock_compose:1.0.1'
 ```
 # Implementation
 
@@ -57,8 +57,8 @@ PinLock(
 If there is no saved pin yet, it promtps the user to create pin. If there is saved pin, it promts the user to enter its pin:
 
 <p align="center">
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin-lock-compose/blob/master/banner_1.gif" />
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin-lock-compose/blob/master/banner_2.gif" />
+  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/banner_1.gif" />
+  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/banner_2.gif" />
 </p>
 
 ---
@@ -81,7 +81,7 @@ ChangePinLock(
 Use this only if there is already saved pin. If there is no saved pin, use simple `PinLock` instead for creating pin for the first time. When using `ChangePinLock`, firstly it prompts the user to enter original pin. After user succesfully authenticates using his original pin, it prompts the user to creat a new pin:
 
 <p align="center">
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin-lock-compose/blob/master/banner_3.gif" />
+  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/banner_3.gif" />
 </p>
 
 ---
@@ -110,11 +110,11 @@ PinManager.clearPin()
 
 You can install and try demo app. All the features are implemented in the demo from creating pin to changing pin.
 
-<a href="https://github.com/raheemadamboev/pin-lock-compose/blob/master/app-debug.apk">Download demo</a>
+<a href="https://github.com/raheemadamboev/pin_lock_compose/blob/master/app-debug.apk">Download demo</a>
 
 <p align="center">
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin-lock-compose/blob/master/screenshot_1.jpg" />
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin-lock-compose/blob/master/screenshot_2.jpg" />
+  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/screenshot_1.jpg" />
+  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/screenshot_2.jpg" />
 </p>
 
 # Projects using this library

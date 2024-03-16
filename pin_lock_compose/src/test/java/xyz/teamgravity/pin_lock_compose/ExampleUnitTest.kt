@@ -1,8 +1,7 @@
 package xyz.teamgravity.pin_lock_compose
 
-import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.Test
 
 /**
  * Example local unit test, which will execute on the development machine (host).
