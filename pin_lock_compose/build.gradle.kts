@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "xyz.teamgravity..pin_lock_compose"
+    namespace = "xyz.teamgravity.pin_lock_compose"
     compileSdk = 34
 
     defaultConfig {
@@ -53,6 +53,10 @@ dependencies {
 
     // compose ui
     implementation(libs.androidx.ui)
+
+    //test
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
     // compose preview
     implementation(libs.androidx.ui.tooling.preview)
@@ -112,7 +116,10 @@ publishing {
         }
     }
     val properties = Properties().apply {
-        load(rootProject.file("local.properties").reader())
+        try {
+            load(rootProject.file("local.propertiess").reader())
+        } catch (_: Exception){}
+
     }
     repositories {
         maven {
@@ -123,13 +130,13 @@ publishing {
                 password = properties.getProperty("GITHUB_TOKEN")
             }
         }
-        //disable maven central for now
+        //disable for now
 //        maven {
 //            name = "sonatype"
 //            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
 //            credentials {
-//                username = System.getenv("MAVEN_CENTRAL_USER") ?: getLocalProperty("MAVEN_CENTRAL_USER")
-//                password = System.getenv("MAVEN_CENTRAL_PASS") ?: getLocalProperty("MAVEN_CENTRAL_PASS")
+//                username = System.getenv("MAVEN_CENTRAL_USER") ?: properties.getProperty("MAVEN_CENTRAL_USER")
+//                password = System.getenv("MAVEN_CENTRAL_PASS") ?: properties.getProperty("MAVEN_CENTRAL_PASS")
 //            }
 //        }
     }

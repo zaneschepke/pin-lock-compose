@@ -46,6 +46,7 @@ jobs:
           body_path: ${{ github.workspace }}/changelogs/${{ github.ref_name }}.txt
           tag_name: ${{ github.ref_name }}
           name: ${{ github.ref_name }}
+          make_latest: true
           draft: false
           prerelease: false
           files: ${{ github.workspace }}/${{ steps.aar-path.outputs.path }}

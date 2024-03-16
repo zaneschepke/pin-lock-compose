@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        maven("https://jitpack.io")
         google()
         mavenCentral()
         gradlePluginPortal()
@@ -8,9 +9,9 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        maven("https://jitpack.io")
         google()
         mavenCentral()
-        maven("https://jitpack.io")
     }
 }
 rootProject.name = "PinLockComposeDemo"

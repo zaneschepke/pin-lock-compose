@@ -2,7 +2,6 @@
 
 <p align="center">
   <a href="http://developer.android.com/index.html"><img alt="Android" src="https://img.shields.io/badge/platform-android-green.svg"/></a>
-  <a href="https://jitpack.io/#raheemadamboev/pin_lock_compose"><img alt="Version" src="https://jitpack.io/v/raheemadamboev/pin_lock_compose.svg"/></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
 </p>
@@ -14,17 +13,32 @@
 # Setup
 
 Add it in your root **build.gradle** at the end of repositories:
-```groovy
-allprojects {
-  repositories {
-    maven { url 'https://jitpack.io' }
-  }
+
+> **_NOTE:_** GitHub packages is a joke and requires you to create a package read scoped token in order to get packages.. I will work on getting this into Maven Central soon. I have had nothing but problems with Jitpack and they have zero support. 
+
+```kotlin
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenLocal()
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/zaneschepke/pin-lock-compose")
+            credentials {
+                username = getLocalProperty(GITHUB_USER_VAR) ?: System.getenv(GITHUB_USER_VAR)
+                password = getLocalProperty(GITHUB_TOKEN_VAR) ?: System.getenv(GITHUB_TOKEN_VAR)
+            }
+        }
+        google()
+        mavenCentral()
+    }
 }
+
 ```  
 
 Include below dependency in build.gradle of application and sync it:
-```groovy
-implementation 'com.github.raheemadamboev:pin_lock_compose:1.0.1'
+```kotlin
+implementation("com.zaneschepke:pin_lock_compose:1.0.3")
 ```
 # Implementation
 
@@ -57,8 +71,8 @@ PinLock(
 If there is no saved pin yet, it promtps the user to create pin. If there is saved pin, it promts the user to enter its pin:
 
 <p align="center">
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/banner_1.gif" />
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/banner_2.gif" />
+  <img width="296" height="600" src="https://github.com/zaneschepke/pin_lock_compose/blob/master/banner_1.gif" />
+  <img width="296" height="600" src="https://github.com/zaneschepke/pin_lock_compose/blob/master/banner_2.gif" />
 </p>
 
 ---
@@ -81,7 +95,7 @@ ChangePinLock(
 Use this only if there is already saved pin. If there is no saved pin, use simple `PinLock` instead for creating pin for the first time. When using `ChangePinLock`, firstly it prompts the user to enter original pin. After user succesfully authenticates using his original pin, it prompts the user to creat a new pin:
 
 <p align="center">
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/banner_3.gif" />
+  <img width="296" height="600" src="https://github.com/zaneschepke/pin_lock_compose/blob/master/banner_3.gif" />
 </p>
 
 ---
@@ -110,35 +124,9 @@ PinManager.clearPin()
 
 You can install and try demo app. All the features are implemented in the demo from creating pin to changing pin.
 
-<a href="https://github.com/raheemadamboev/pin_lock_compose/blob/master/app-debug.apk">Download demo</a>
+<a href="https://github.com/zaneschepke/pin_lock_compose/blob/master/app-debug.apk">Download demo</a>
 
 <p align="center">
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/screenshot_1.jpg" />
-  <img width="296" height="600" src="https://github.com/raheemadamboev/pin_lock_compose/blob/master/screenshot_2.jpg" />
+  <img width="296" height="600" src="https://github.com/zaneschepke/pin_lock_compose/blob/master/screenshot_1.jpg" />
+  <img width="296" height="600" src="https://github.com/zaneschepke/pin_lock_compose/blob/master/screenshot_2.jpg" />
 </p>
-
-# Projects using this library
-
-**Notepad**: 40 000+ downloads. 
-
-<a href="https://play.google.com/store/apps/details?id=xyz.teamgravity.notepad">Google Play Store</a>
-
-<a href="https://github.com/raheemadamboev/notepad-app">Github</a>
-
-# Licence
-
-```xml
-Designed and developed by raheemadamboev (Raheem) 2023.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
