@@ -115,30 +115,25 @@ publishing {
             }
         }
     }
-    val properties = Properties().apply {
-        try {
-            load(rootProject.file("local.propertiess").reader())
-        } catch (_: Exception){}
 
-    }
     repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/zaneschepke/pin-lock-compose")
-            credentials {
-                username = properties.getProperty("GITHUB_USER")
-                password = properties.getProperty("GITHUB_TOKEN")
-            }
-        }
-        //disable for now
 //        maven {
-//            name = "sonatype"
-//            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+//            name = "GitHubPackages"
+//            url = uri("https://maven.pkg.github.com/zaneschepke/pin-lock-compose")
 //            credentials {
-//                username = System.getenv("MAVEN_CENTRAL_USER") ?: properties.getProperty("MAVEN_CENTRAL_USER")
-//                password = System.getenv("MAVEN_CENTRAL_PASS") ?: properties.getProperty("MAVEN_CENTRAL_PASS")
+//                username = getLocalProperty("GITHUB_USER")
+//                password = getLocalProperty("GITHUB_TOKEN")
 //            }
 //        }
+        //disable for now
+        maven {
+            name = "sonatype"
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = System.getenv("MAVEN_CENTRAL_USER") ?: getLocalProperty("MAVEN_CENTRAL_USER")
+                password = System.getenv("MAVEN_CENTRAL_PASS") ?: getLocalProperty("MAVEN_CENTRAL_PASS")
+            }
+        }
     }
 }
 
