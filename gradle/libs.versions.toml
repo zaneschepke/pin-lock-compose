@@ -9,7 +9,7 @@ ui = "1.6.3"
 espressoCore = "3.5.1"
 androidx-junit = "1.1.5"
 #plugins
-agp = "8.3.0"
+agp = "8.3.1"
 kotlin = "1.9.22"
 
 

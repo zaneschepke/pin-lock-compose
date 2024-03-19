@@ -1,6 +1,6 @@
 pluginManagement {
     repositories {
-        maven("https://jitpack.io")
+        maven("https://gitea.zaneschepke.com/api/packages/zane/maven")
         google()
         mavenCentral()
         gradlePluginPortal()
@@ -9,7 +9,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        maven("https://jitpack.io")
+        maven("https://gitea.zaneschepke.com/api/packages/zane/maven")
         google()
         mavenCentral()
     }

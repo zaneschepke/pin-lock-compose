@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "xyz.teamgravity.pin_lock_compose"
-    compileSdk = 34
+    namespace = "${Constants.PACKAGE}.pin_lock_compose"
+    compileSdk = Constants.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 21
+        minSdk = Constants.MIN_SDK
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -29,7 +29,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
+        kotlinCompilerExtensionVersion = Constants.COMPILER_VERSION
     }
 
     packaging {
@@ -117,6 +117,7 @@ publishing {
     }
 
     repositories {
+        //disable github packages
 //        maven {
 //            name = "GitHubPackages"
 //            url = uri("https://maven.pkg.github.com/zaneschepke/pin-lock-compose")
@@ -125,15 +126,28 @@ publishing {
 //                password = getLocalProperty("GITHUB_TOKEN")
 //            }
 //        }
-        //disable for now
+        //disable maven central for now
+//        maven {
+//            name = "sonatype"
+//            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+//            credentials {
+//                username = getLocalProperty("MAVEN_CENTRAL_USER")
+//                password = getLocalProperty("MAVEN_CENTRAL_PASS")
+//            }
+//        }
         maven {
-            name = "sonatype"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = System.getenv("MAVEN_CENTRAL_USER") ?: getLocalProperty("MAVEN_CENTRAL_USER")
-                password = System.getenv("MAVEN_CENTRAL_PASS") ?: getLocalProperty("MAVEN_CENTRAL_PASS")
+            name = "Gitea"
+            url = uri("https://gitea.zaneschepke.com/api/packages/zane/maven")
+
+            credentials(HttpHeaderCredentials::class.java) {
+                name = "Authorization"
+                value = getLocalProperty("GITEA_TOKEN")
+            }
+            authentication {
+                val header by registering(HttpHeaderAuthentication::class)
             }
         }
+
     }
 }
 
