@@ -12,9 +12,26 @@
 
 # Setup
 
-Add it in your root **build.gradle** at the end of repositories:
+Add it in your root **build.gradle** to repositories:
 
-> **_NOTE:_** GitHub packages is a joke and requires you to create a package read scoped token in order to get packages.. I will work on getting this into Maven Central soon. I have had nothing but problems with Jitpack and they have zero support. 
+> **_NOTE:_** GitHub packages requires you to create a package read scoped token in order to get packages.. I will work on getting this into Maven Central as some point. For now, if you want an option that doesn't require auth you can pull the package from my Gitea packages repository.
+
+For pulling from my Gitea package registry (recommended)
+
+```kotlin
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenLocal()
+        maven("https://gitea.zaneschepke.com/api/packages/zane/maven")
+        google()
+        mavenCentral()
+    }
+}
+
+```
+
+For pulling from GitHub's package registry
 
 ```kotlin
 dependencyResolutionManagement {
