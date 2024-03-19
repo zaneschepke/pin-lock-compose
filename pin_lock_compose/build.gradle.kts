@@ -88,7 +88,7 @@ publishing {
             pom {
                 name.set("Pin Lock Compose")
                 description.set("Light library that is beautiful Pin Lock screen for Jetpack Compose. The library handles saving pin in Encrypted file. Integration is very easy and fast.")
-                url.set("https://github.com/zaneschepke/pin-lock-compose")
+                url.set("https://github.com/zaneschepke/pin_lock_compose")
 
                 licenses {
                     license {
@@ -98,9 +98,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection.set("scm:git:https://github.com/zaneschepke/pin-lock-compose")
-                    developerConnection.set("scm:git:https://github.com/zaneschepke/pin-lock-compose")
-                    url.set("https://github.com/zaneschepke/pin-lock-compose")
+                    connection.set("scm:git:https://github.com/zaneschepke/pin_lock_compose")
+                    developerConnection.set("scm:git:https://github.com/zaneschepke/pin_lock_compose")
+                    url.set("https://github.com/zaneschepke/pin_lock_compose")
                 }
                 developers {
                     organization {
