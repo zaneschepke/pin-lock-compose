@@ -10,53 +10,29 @@
 🔐 Light library that is beautiful Pin Lock screen for Jetpack Compose. The library handles saving pin in Encrypted file. Integration is very easy and fast.
 </p>
 
-# Setup
-
-Add it in your root **build.gradle** to repositories:
-
-> **_NOTE:_** GitHub packages requires you to create a package read scoped token in order to get packages.. I will work on getting this into Maven Central as some point. For now, if you want an option that doesn't require auth you can pull the package from my Gitea packages repository.
-
-For pulling from my Gitea package registry (recommended)
+# Download
 
 ```kotlin
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        mavenLocal()
-        maven("https://gitea.zaneschepke.com/api/packages/zane/maven")
-        google()
-        mavenCentral()
-    }
-}
-
-```
-
-For pulling from GitHub's package registry
-
-```kotlin
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        mavenLocal()
-        maven {
+repositories {
+// recommeneded
+  mavenCentral()
+// alternatives 
+  maven("https://gitea.zaneschepke.com/api/packages/zane/maven")
+  maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/zaneschepke/pin-lock-compose")
             credentials {
-                username = getLocalProperty(GITHUB_USER_VAR) ?: System.getenv(GITHUB_USER_VAR)
-                password = getLocalProperty(GITHUB_TOKEN_VAR) ?: System.getenv(GITHUB_TOKEN_VAR)
+                username = GITHUB_USERNAME
+                password = GITHUB_TOKEN
             }
         }
-        google()
-        mavenCentral()
-    }
 }
 
-```  
-
-Include below dependency in build.gradle of application and sync it:
-```kotlin
-implementation("com.zaneschepke:pin_lock_compose:1.0.3")
+dependencies {
+  implementation("com.zaneschepke:pin_lock_compose:1.0.3")
+}
 ```
+
 # Implementation
 
 Firstly, initialize the library on your `onCreate` of Application class:
