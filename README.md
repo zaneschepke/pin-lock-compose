@@ -14,9 +14,11 @@
 
 ```kotlin
 repositories {
-// recommeneded
+
+// recommended repo
   mavenCentral()
-// alternatives 
+
+// alternative repos
   maven("https://gitea.zaneschepke.com/api/packages/zane/maven")
   maven {
             name = "GitHubPackages"
