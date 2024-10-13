@@ -49,11 +49,12 @@ class MainActivity : ComponentActivity() {
                                 title = { pinExists ->
                                     Text(
                                         text = if (pinExists) "Enter your pin" else "Create pin",
-                                        color = Color.White,
+                                        color = MaterialTheme.colorScheme.onBackground,
                                         fontSize = 22.sp
                                     )
                                 },
-                                color = MaterialTheme.colorScheme.primary,
+                                backgroundColor = MaterialTheme.colorScheme.background,
+                                textColor = MaterialTheme.colorScheme.onBackground,
                                 onPinCorrect = {
                                     // pin is correct, navigate or hide pin lock
                                     Log.d(TAG, "Pin is correct")
@@ -76,11 +77,10 @@ class MainActivity : ComponentActivity() {
                                 title = { authenticated ->
                                     Text(
                                         text = if (authenticated) "Enter new pin" else "Enter your pin",
-                                        color = Color.White,
+                                        color = MaterialTheme.colorScheme.onBackground,
                                         fontSize = 22.sp
                                     )
                                 },
-                                color = MaterialTheme.colorScheme.primary,
                                 onPinIncorrect = {
                                     // pin is incorrect, show error
                                     Log.d(TAG, "Pin is incorrect")
@@ -89,7 +89,9 @@ class MainActivity : ComponentActivity() {
                                     // pin changed, navigate or hide pin lock
                                     Log.d(TAG, "Pin is changed")
                                     navigation = Screen.Main
-                                }
+                                },
+                                backgroundColor = MaterialTheme.colorScheme.background,
+                                textColor = MaterialTheme.colorScheme.onBackground
                             )
                         }
 

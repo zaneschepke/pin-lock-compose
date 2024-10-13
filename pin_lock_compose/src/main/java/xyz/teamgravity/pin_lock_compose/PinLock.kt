@@ -7,6 +7,7 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -49,7 +50,7 @@ import androidx.constraintlayout.compose.Dimension
  * @param title
  * Container for title text. It passes the pinExists boolean, so you can decide what title to show. For pinExists value, it passes true
  * if pin already exists, false if pin does not exist.
- * @param color
+ * @param backgroundColor
  * Background color of container.
  * @param onPinCorrect
  * Gets called when entered pin matches genuine pin.
@@ -61,7 +62,8 @@ import androidx.constraintlayout.compose.Dimension
 @Composable
 fun PinLock(
     title: @Composable (pinExists: Boolean) -> Unit,
-    color: Color,
+    backgroundColor: Color,
+    textColor: Color,
     onPinCorrect: () -> Unit,
     onPinIncorrect: () -> Unit,
     onPinCreated: () -> Unit,
@@ -75,7 +77,8 @@ fun PinLock(
         title = {
             title(pinExists)
         },
-        color = color,
+        backgroundColor = backgroundColor,
+        textColor = textColor,
         animate = animate,
         numbers = numbers,
         onNumberChange = { number ->
@@ -124,7 +127,8 @@ fun PinLock(
 @Composable
 fun ChangePinLock(
     title: @Composable (authenticated: Boolean) -> Unit,
-    color: Color,
+    backgroundColor: Color,
+    textColor: Color,
     onPinIncorrect: () -> Unit,
     onPinChanged: () -> Unit,
 ) {
@@ -137,7 +141,8 @@ fun ChangePinLock(
         title = {
             title(authenticated)
         },
-        color = color,
+        backgroundColor = backgroundColor,
+        textColor = textColor,
         animate = animate,
         numbers = numbers,
         onNumberChange = { number ->
@@ -186,7 +191,8 @@ fun ChangePinLock(
 @Composable
 private fun BasePinLock(
     title: @Composable () -> Unit,
-    color: Color,
+    backgroundColor: Color,
+    textColor: Color,
     animate: Boolean,
     numbers: List<Int>,
     onNumberChange: (number: Int) -> Unit,
@@ -195,7 +201,7 @@ private fun BasePinLock(
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .background(color)
+            .background(backgroundColor)
     ) {
         val (titleC, numberC) = createRefs()
         val (oneS, twoS) = createRefs()
@@ -240,10 +246,10 @@ private fun BasePinLock(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                PinIndicator(filled = numbers.isNotEmpty())
-                PinIndicator(filled = numbers.size > 1)
-                PinIndicator(filled = numbers.size > 2)
-                PinIndicator(filled = numbers.size > 3)
+                PinIndicator(filled = numbers.isNotEmpty(), color = textColor)
+                PinIndicator(filled = numbers.size > 1, color = textColor)
+                PinIndicator(filled = numbers.size > 2, color = textColor)
+                PinIndicator(filled = numbers.size > 3, color = textColor)
             }
         }
         Spacer(
@@ -255,10 +261,14 @@ private fun BasePinLock(
         NumberButton(
             number = 1,
             onClick = onNumberChange,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             reference = oneB,
         )
         NumberButton(
             number = 2,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             onClick = onNumberChange,
             reference = twoB,
             constrain = {
@@ -268,6 +278,8 @@ private fun BasePinLock(
         NumberButton(
             number = 3,
             onClick = onNumberChange,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             reference = threeB,
             constrain = {
                 linkTo(top = oneB.top, bottom = oneB.bottom)
@@ -275,11 +287,15 @@ private fun BasePinLock(
         )
         NumberButton(
             number = 4,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             onClick = onNumberChange,
             reference = fourB,
         )
         NumberButton(
             number = 5,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             onClick = onNumberChange,
             reference = fiveB,
             constrain = {
@@ -288,6 +304,8 @@ private fun BasePinLock(
         )
         NumberButton(
             number = 6,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             onClick = onNumberChange,
             reference = sixB,
             constrain = {
@@ -296,12 +314,16 @@ private fun BasePinLock(
         )
         NumberButton(
             number = 7,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             onClick = onNumberChange,
             reference = sevenB,
         )
         NumberButton(
             number = 8,
             onClick = onNumberChange,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             reference = eightB,
             constrain = {
                 linkTo(top = sevenB.top, bottom = sevenB.bottom)
@@ -310,6 +332,8 @@ private fun BasePinLock(
         NumberButton(
             number = 9,
             onClick = onNumberChange,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             reference = nineB,
             constrain = {
                 linkTo(top = sevenB.top, bottom = sevenB.bottom)
@@ -317,6 +341,8 @@ private fun BasePinLock(
         )
         NumberButton(
             number = 0,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
             onClick = onNumberChange,
             reference = zeroB,
             constrain = {
@@ -332,7 +358,7 @@ private fun BasePinLock(
         ) {
             Icon(
                 imageVector = Backspace,
-                tint = Color.White,
+                tint = textColor,
                 contentDescription = stringResource(id = R.string.cd_backspace)
             )
         }
@@ -352,6 +378,7 @@ private fun BasePinLock(
  */
 @Composable
 private fun PinIndicator(
+    color: Color,
     filled: Boolean,
 ) {
     Box(
@@ -359,8 +386,8 @@ private fun PinIndicator(
             .padding(5.dp)
             .size(15.dp)
             .clip(CircleShape)
-            .background(if (filled) Color.White else Color.Transparent)
-            .border(2.dp, Color.White, CircleShape)
+            .background(if (filled) color else Color.Transparent)
+            .border(2.dp, color, CircleShape)
     )
 }
 
@@ -379,6 +406,8 @@ private fun PinIndicator(
 @Composable
 private fun ConstraintLayoutScope.NumberButton(
     number: Int,
+    backgroundColor: Color,
+    textColor: Color,
     onClick: (number: Int) -> Unit,
     reference: ConstrainedLayoutReference,
     constrain: ConstrainScope.() -> Unit = {},
@@ -387,7 +416,8 @@ private fun ConstraintLayoutScope.NumberButton(
         onClick = {
             onClick(number)
         },
-        colors = ButtonDefaults.buttonColors(containerColor = NumberButtonBackground),
+        border = BorderStroke(color = textColor, width = 1.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = backgroundColor),
         modifier = Modifier
             .size(90.dp)
             .padding(10.dp)
@@ -395,12 +425,7 @@ private fun ConstraintLayoutScope.NumberButton(
     ) {
         Text(
             text = number.toString(),
-            color = Color.White,
+            color = textColor,
         )
     }
 }
-
-/**
- * Background color of number button.
- */
-private val NumberButtonBackground = Color.White.copy(alpha = 0.3F)

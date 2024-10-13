@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     `maven-publish`
     signing
 }
@@ -126,15 +127,14 @@ publishing {
 //                password = getLocalProperty("GITHUB_TOKEN")
 //            }
 //        }
-        //disable maven central for now
-//        maven {
-//            name = "sonatype"
-//            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-//            credentials {
-//                username = getLocalProperty("MAVEN_CENTRAL_USER")
-//                password = getLocalProperty("MAVEN_CENTRAL_PASS")
-//            }
-//        }
+        maven {
+            name = "sonatype"
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = getLocalProperty("MAVEN_CENTRAL_USER")
+                password = getLocalProperty("MAVEN_CENTRAL_PASS")
+            }
+        }
         maven {
             name = "Gitea"
             url = uri("https://gitea.zaneschepke.com/api/packages/zane/maven")
