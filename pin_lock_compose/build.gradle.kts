@@ -118,15 +118,14 @@ publishing {
     }
 
     repositories {
-        //disable github packages
-//        maven {
-//            name = "GitHubPackages"
-//            url = uri("https://maven.pkg.github.com/zaneschepke/pin-lock-compose")
-//            credentials {
-//                username = getLocalProperty("GITHUB_USER")
-//                password = getLocalProperty("GITHUB_TOKEN")
-//            }
-//        }
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/zaneschepke/pin-lock-compose")
+            credentials {
+                username = getLocalProperty("GITHUB_USER")
+                password = getLocalProperty("GITHUB_TOKEN")
+            }
+        }
         maven {
             name = "sonatype"
             url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
@@ -135,19 +134,6 @@ publishing {
                 password = getLocalProperty("MAVEN_CENTRAL_PASS")
             }
         }
-        maven {
-            name = "Gitea"
-            url = uri("https://gitea.zaneschepke.com/api/packages/zane/maven")
-
-            credentials(HttpHeaderCredentials::class.java) {
-                name = "Authorization"
-                value = getLocalProperty("GITEA_TOKEN")
-            }
-            authentication {
-                val header by registering(HttpHeaderAuthentication::class)
-            }
-        }
-
     }
 }
 
